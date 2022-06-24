@@ -1,0 +1,14 @@
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <vector> //for vectors
+#include <sstream>
+#include <limits>
+#include <cstring>
+#include <algorithm>
+#include <numeric>
+#include <time.h> //for random numbers 
+#include <cmath>
+#include <string.h>
+#include <functional> //for lamda function
+

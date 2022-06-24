@@ -1,0 +1,1226 @@
+C++ lessons
+
+Basics
+
+Generate random number include the time library then
+
+srand(time(NULL));
+     std::cout << "\n" << rand() % 11; /* 11 signifies from 0 to 10 */
+
+data types
+
+bool
+char
+unsigned
+short
+int 
+long
+float
+double
+auto this is used for the compiler to automatically assign type
+
+sizeof(variable) to know byte of variable
+
+To define a string:- std::string string_name;
+
+To obtain input from user and assign it to variable
+   getline(std::cin,variable);
+
+to convert to upper or lowercase
+include <algorithm>
+
+transform(varable.begin(), variable.end(), variable.begin(), ::tolower);
+
+In using if conditions, check conditions with double quotations for characters or strings
+
+Arrays in C++
+
+declaring arrays
+
+int matrix_numb[10] = {1};
+
+int matrix_numb[] = {1};
+
+size of array is known as sizeof(matrix_numb)/sizeof(matrix_numb[0])
+
+Vectors are like arrays but differs slightly in specifying the size and appending
+
+to append we use array_name.push_back(value);
+
+To loop through a vector
+#include <numeric>
+std::iota(std::begin(myVec), std::end(myVec),0);//the 0 indicates from what number it should start
+
+Then use for loop
+
+For loop
+
+you can also use
+
+for (auto y:variable)
+       std::cout<< y << "\n"; to iterate through variable of each item
+
+FUnctions
+
+in functions we have to declare them before the main function and define them after the main function
+
+
+Pointers
+
+to declare a pointer which will hold the address of the variable stored
+ int* variablepointer = NULL; // point to initially NULL so it won't point to unwanted address
+ variablepointer = &variabl; // this will give the address of the desired variable to our pointer
+
+ int value = *variablepointer; // this will give the value stored in the pointer to a value; 
+
+
+Exceptions
+
+ double num1, num2, answer;
+    std::cout << "enter 1st number: ";
+    std::cin >> num1;
+    std::cout << "enter 2nd number: ";
+    std::cin >> num2;
+
+    try{
+
+        if(num2 == 0){
+            throw "not divisible";
+        }
+        else {
+            printf("%.1f / %.1f = %.1f", num1, num2, num1/num2);
+        }
+
+    }
+    catch(const char* exp){
+        std::cout << "error :" << exp << "\n"; /* exp returns not divisible
+    }
+
+
+
+Messing around with strings
+
+std::vector<std::string> strVec(10);
+
+    std::string str("i'm a string");
+    strVec[0] = str;
+
+     /*to find a word or character in a string*/
+    if(str.find("string") != std::string::npos){
+        std::cout << "ale at index : " <<  str.find("string") << "\n";
+    }
+
+    for ASCII
+    char aChar = 'a';     /* capital A - Z = 65-90 */
+    int aInt = aChar;      /* small a - z = 97-122 */
+
+    std::cout << "A code" << aInt;
+
+
+To convert back we can use int achar = std::stoi(aInt);
+
+
+Conversion of strings to vectors
+
+
+std::vector<std::string> StringToVector(std::string theString, char separator);
+
+int main()
+{
+
+    std::vector<std::string> vec =
+    StringToVector("This is a random string", ' ');
+
+    for(int i = 0; i < vec.size(); i++){
+        std:cout <<vec[i] << "\n";
+    }
+
+return 0;
+}
+
+//Functions
+
+
+std::vector<std::string> StringToVector(std::string theString, char separator){
+
+       std::vector<std::string> vecsWords;
+
+       std::stringstream ss(theString);
+       std::string sIndivStr;
+       while(getline(ss, sIndivStr, separator)){
+           vecsWords.push_back(sIndivStr);
+       }
+       return vecsWords;
+
+
+}
+
+Conversion of vectors to strings
+
+
+std::string VectorToString(std::vector<string> theVector, char separator);
+
+int main()
+{
+     std::vector<string> names(3);
+     names[0] = "sami";
+     names[1] = "is";
+     names[2] = "me";
+    std::string vec =
+    VectorToString(names, ' ');
+
+
+        std:cout <<vec << "\n";
+
+
+return 0;
+}
+
+//Functions
+
+
+std::string VectorToString(std::vector<string> theVector, char separator){
+
+       std::string vecsWords = "";
+
+       for(auto nam:theVector){
+
+             vecsWords += nam + separator;
+
+       }
+       return vecsWords;
+
+
+}
+
+Whitespace Trimmer
+
+std::string TrimWhiteSpace(std::string withWhiteSpace);
+
+int main()
+{
+
+  /*  std::string name = "sami";
+    name.erase(name.begin()+0);
+       std::cout << name;
+*/
+
+    std::string withoutWhiteSpace = TrimWhiteSpace("The    quick brown fox jumped over the lazy dogs.");
+
+    std::cout << withoutWhiteSpace;
+
+    char cString = '\r';
+    int iname = cString;
+
+    std::cout << iname;
+
+
+
+
+return 0;
+}
+
+//Functions
+
+std::string TrimWhiteSpace(std::string withWhiteSpace){
+
+
+    for(int i = 0; i < withWhiteSpace.size(); i++ ){
+    char cString = withWhiteSpace[i];
+    int iname = cString;
+
+          if( iname == 32 || iname == 9 || iname == 12 || iname == 13 || iname ==10){
+            withWhiteSpace.erase(withWhiteSpace.begin()+i);
+          }
+
+
+    }
+    return withWhiteSpace;
+
+
+
+}
+
+
+check if a letter or number
+ use these
+
+isalnum(variable) to check if it's a number or letter
+isalpha(vaiable)   to check if it's a letter
+isupper(variable) tocheck if it's uppercase
+isdigit(variable) if it's a number
+isspace(variable) if it's a space
+
+
+Enctyption and decryption
+
+
+std::string CaesarCipher(std::string toEncrypt,int  byHowMuch,bool condition);
+std::string dCaesarCipher(std::string toDecrypt,int  byHowMuch,bool condition);
+
+int main()
+{
+    std::string theString = "Make me Secret";
+    std::string encryptedStr = CaesarCipher(theString, 5, true);
+    std::string decryptedStr = dCaesarCipher(encryptedStr, 5, false);
+    for(auto y:encryptedStr){
+    std::cout << "Encrypted : " << y << "\n";
+    }
+
+    for(auto y:decryptedStr){
+            std::cout << "----------------------";
+    std::cout << "Decrypted : " << y << "\n";
+    }
+   /* std::cout << "Dectypted" << decryptedStr << "\n";*/
+
+return 0;
+}
+//Functions
+std::string CaesarCipher(std::string toEncrypt, int byHowMuch, bool condition){
+
+                      std::string enc;
+                       for(int i = 0; i < toEncrypt.size(); i++){
+
+                       char aChar = toEncrypt[i];
+                       int aInt = aChar;
+
+                        aInt = aInt + byHowMuch;
+
+                        toEncrypt[i] = aInt;
+                        enc.push_back(toEncrypt[i]);
+
+
+                       }
+                       return enc;
+}
+
+std::string dCaesarCipher(std::string toDecrypt,int  byHowMuch,bool condition){
+
+                        std::string dec;
+                       for(int i = 0; i < toDecrypt.size(); i++){
+
+                       char aChar = toDecrypt[i];
+                       int aInt = aChar;
+
+                        aInt = aInt - byHowMuch;
+
+                        toDecrypt[i] = aInt;
+                        dec.push_back(toDecrypt[i]);
+
+
+                       }
+                       return dec;
+}
+
+Check Primes
+
+
+bool IsPrime(int number);
+std::vector<int> primes(int amount);
+
+int main()
+{
+    int userPrime;
+    std::cout << "Enter a number: ";
+    std::cin >> userPrime;
+    bool verdict = IsPrime(userPrime);
+
+    if(verdict == 1){
+        std::cout << "your number is a prime ";
+
+    }
+    else if ( verdict == 0){
+        std::cout << "your number is not a prime \n";
+    }
+
+    int userLimit;
+    std::cout << "Enter until which integer do you want to view primes? : ";
+    std::cin >> userLimit;
+
+
+    for(int i = 2; i < userLimit; i++){
+
+            if(IsPrime(i)== 1){
+
+                std::cout << i << "\n";
+
+
+            }
+
+
+
+    }
+
+
+
+
+
+
+
+return 0;
+}
+//Functions
+bool IsPrime(int number){
+
+    int counter = 0;
+
+    for(int i = 2; i < number; i++){
+
+            if(number % i ==0){
+                return false;
+            }
+            else {
+                counter++;
+                if(counter == number - 2){
+                    return true;
+                }
+            }
+
+
+    }
+
+
+
+ }
+
+Generating random number
+
+std::vector<int> randGen(int initial, int counter , int finish);
+
+int main()
+{
+     int starting, counting, ending;
+     std::cout << "Enter the inital starting point: ";
+     std::cin >> starting;
+     std::cout << "Enter the final ending point: ";
+     std::cin >> ending;
+     std::cout << "Enter how many values you want in the vector: ";
+     std::cin >> counting;
+     std::vector<int> userVector = randGen(starting,counting,ending);
+
+     for(auto y: userVector){
+        std::cout << y << " ";
+     }
+return 0;
+}
+//Functions
+std::vector<int> randGen(int initial, int counter , int finish){
+
+        std::vector<int> arrayOfRand;
+          for(int i = 0; i < counter; i++){
+          int number = initial + (rand() % (finish - initial +1));
+          arrayOfRand.push_back(number);     ---------------- <---this finish- initial + 1 is the number of elements between the ranges
+    }
+    return arrayOfRand;
+}
+
+Maximummm
+
+for(int i=0; i < unsortedList.size(); i++){
+
+
+                if(unsortedList[i] > maximum){
+
+                    maximum = unsortedList[i];
+                }
+                
+
+        }
+
+Sorting 
+
+std::vector<int> sorter(std::vector<int> unsortedList);
+
+int main()
+{
+    std::vector<int> unsorted = {28,49,50,30};
+    std::vector<int> sortedd = sorter(unsorted);
+
+    for( auto y: sortedd){
+        std::cout << y << "\n";
+    }
+
+return 0;
+}
+//Functions
+std::vector<int> sorter(std::vector<int> unsortedList){
+
+        std::vector<int> sorted;
+        int num = 0;
+        for(int i=0; i < unsortedList.size(); i++){
+
+            for(int j = 0; j< unsortedList.size(); j++){
+
+                if(unsortedList[i] < unsortedList[j]){
+
+                    num = unsortedList[i];
+                    unsortedList[i] = unsortedList[j];
+                    unsortedList[j] = num;
+
+
+            }
+
+        }
+
+        }
+        return unsortedList;
+
+}
+
+Recursion
+
+/*recursion
+
+ when a function calls itself;
+ need an exit condition to avoid infinite loop
+
+
+ */
+
+ int Factorial(int number);
+
+int main()
+
+{
+    int facto = Factorial(6);
+
+    std::cout << facto << "\n";
+
+return 0;
+}
+//Functions
+int Factorial(int number){
+    
+int result;
+    if(number == 1){
+        return 1;
+    }
+    else {
+         result = number * Factorial(number -1);
+
+    }
+    return result;
+ }
+
+Fibonacci
+
+Fn = Fn-2 + Fn-1
+
+
+/*recursion
+
+ when a function calls itself;
+ need an exit condition to avoid infinite loop
+
+
+ */
+int fibonn(int number);
+
+
+int main()
+
+{
+    int calFib = 4;
+    std::cout<< fibonn(calFib);
+
+
+
+
+
+return 0;
+}
+//Functions
+int fibonn(int number){
+
+if(number < 2)
+{
+return number;
+}
+else {
+    return fibonn(number -1) + fibonn(number -2);
+}
+
+}
+
+/* He did it as
+
+     if(index < 2)
+{
+return index;
+}
+else {
+    return fibonn(index -1) + fibonn(index -2);
+}
+*/
+
+
+Overloaded functions
+
+/*overloaded functions
+
+ same function name, same return type but different number of parameters
+
+ */
+double Area(double radius);
+double Area(double height, double width);
+
+
+int main()
+
+{
+    double circle;
+    double rectangle, radius,length,height;
+    char response;
+    std::cout << "Rectangle or Circle? ";
+    std::cin >> response;
+
+    switch(response){
+
+     case 'c':
+
+         std::cout << "enter radius? ";
+         std::cin >> radius;
+        circle = Area(radius);
+        std::cout << " area of circle is : " << circle << "\n";
+        break;
+    case 'r':
+
+         std::cout << "enter length? ";
+         std::cin >> length;
+         std::cout << "enter height? ";
+         std::cin >> height;
+        rectangle = Area(length,height);
+        std::cout << " area of rectangle is : " << rectangle << "\n";
+        break;
+    default:
+        std::cout << "Please enter c or r :";
+     }
+
+return 0;
+}
+//Functions
+
+double Area(double radius){
+
+    double area = 3.14 * radius * radius;
+    return area;
+
+}
+double Area(double height, double width){
+
+   double area = height * width;
+   return area;
+}
+
+Lambda expressions
+
+/*Lambda Expressions
+
+ to perform list operations in a single line
+
+ */
+
+
+
+int main()
+
+{
+    std::vector<int> vecToBeSorted = {3,2,5,1};
+
+    std::sort(vecToBeSorted.begin(), vecToBeSorted.end(),[](int x, int y){return x < y;});
+
+    for( auto sorted: vecToBeSorted){
+            std::cout << sorted << " ";
+
+    }
+
+return 0;
+}
+
+Copy if
+
+/*Lambda Expressions with copy if
+
+ to perform list operations in a single line
+
+ */
+
+
+
+int main()
+
+{
+    std::vector<int> vecToBeSorted = {33,32,52,1};
+    std::vector<int> evenVector;
+
+    std::sort(vecToBeSorted.begin(), vecToBeSorted.end(),[](int x, int y){return x < y;});
+
+    for( auto sorted: vecToBeSorted){
+            std::cout << sorted << " ";
+
+    }
+
+    std::copy_if(vecToBeSorted.begin(), vecToBeSorted.end(),std::back_inserter(evenVector),[](int x){return (x % 2) == 0;});
+
+
+  for( auto even: evenVector){
+            std::cout << even << " ";
+
+    }
+
+
+
+
+
+
+
+
+return 0;
+}
+
+Lambda with for each
+
+*Lambda Expressions with sum of vector members using for each
+
+ to perform list operations in a single line
+
+ */
+
+
+
+int main()
+
+{
+    std::vector<int> vecToBeSorted = {33,32,52,1};
+    std::vector<int> evenVector;
+
+    std::sort(vecToBeSorted.begin(), vecToBeSorted.end(),[](int x, int y){return x < y;});
+
+    for( auto sorted: vecToBeSorted){
+            std::cout << sorted << " ";
+
+    }
+
+    std::copy_if(vecToBeSorted.begin(), vecToBeSorted.end(),std::back_inserter(evenVector),[](int x){return (x % 2) == 0;});
+
+
+  for( auto even: evenVector){
+            std::cout << even << " ";
+
+    }
+
+        int sum = 0;
+
+  std::for_each(vecToBeSorted.begin(), vecToBeSorted.end(),[&](int x){return sum += x;});
+
+  std::cout << "Sum is : " << sum;
+
+
+
+
+
+return 0;
+}
+
+Lambda expression with transform to add two vectors
+
+/*Lambda Expressions with sum of vector members using transform
+
+ to perform list operations in a single line
+
+ */
+
+
+
+int main()
+
+{
+    std::vector<int> vecToBeadded1 = {10,3,2,1};
+    std::vector<int> vecToBeadded2 = {10,3,2,1};
+    std::vector<int> vecAdded(4); /* you have to specify the size */
+
+
+    transform(vecToBeadded1.begin(),vecToBeadded1.end(),vecToBeadded2.begin(), vecAdded.begin(),[](int x, int y){return x + y;});
+
+       for (auto value:vecAdded){
+        std::cout << "sum of vectors is : " << value;
+       }
+
+
+
+
+
+
+
+
+
+return 0;
+}
+
+Lambda expression for booleans
+
+/*Lambda Expressions with ternary operator for boolean
+
+ */
+
+
+
+int main()
+
+{
+    int age = 17;
+    bool criteria = (age<18) ? true:false;
+    std::cout.setf(std::ios::boolalpha); /* to turn the 1 and 0 of boolean to true or false*/
+
+    std::cout << "can i vote? " <<criteria;
+return 0;
+
+}
+
+Lambda with fibonacci
+
+/*Lambda Expressions with fibonacci
+
+ */
+
+
+
+int main()
+
+{
+
+    std::function<int(int)> Fib = [&Fib](int n) {return n < 2 ? n: Fib(n -1) + Fib(n - 2);};
+
+      std::cout << "answer :" << Fib(4);
+      return 0;
+      }
+
+Lambda Expressions with fibonacci for user to request number of fibonacci they want
+
+
+
+/*Lambda Expressions with fibonacci for user to request number of fibonacci they want
+
+
+ */
+
+
+
+int main()
+
+{
+    std::vector<int> fibs;
+    int fibroids;
+    std::cout << "how many you want? ";
+    std::cin >>fibroids;
+    std::function<int(int)> Fib = [&Fib](int n) {return n < 2 ? n: Fib(n -1) + Fib(n - 2);};
+
+    for(int i = 0; i < fibroids; i ++){
+
+          fibs.push_back(Fib(i));
+
+    }
+    for(auto y: fibs){
+        std::cout << y << "\n";
+    }
+
+
+      return 0;
+      }
+
+
+Object oriented Programming in a nutshell
+
+
+/* Object oriented Programming
+    class
+   - make your attributes only accessible
+    to the classes by making them private
+
+   - static variables are shared values
+   - public are accessible anywhere
+
+ */
+
+ /* big class Animal with all attribute plus the scenarios we might face*/
+ class Animal{
+
+ /* Attributes are private when we want only the class to access them*/
+private:
+    std::string name;
+    double height;
+    double weight;
+
+    /*static variables are shared values*/
+    static int numOfAnimals;
+ /* public refers to accessibility anywhere*/
+
+public:
+    std::string GetName(){return name;}; /* function to get a name */
+    void SetName(std::string name){this->name = name;} /*function to set a name, this refers to the object of the assigned name*/
+    double GetHeight(){return height;} /* function to get a height */
+    void SetHeight(double height){this->height = height;} /*function to set a height */
+    double GetWeight(){return weight;} /* function to get a weight */
+    void SetWeight(double weight){this->weight = weight;} /*function to set a weight */
+
+
+    void SetAll(std::string, double, double); /*function to set all attribute */
+    Animal(std::string, double, double);/*constructor*/
+    Animal(); /*overloaded constructor*/
+    ~Animal(); /*deconstructor*/
+    static int GetNumOfAnimals(){return numOfAnimals;} /* function to get number of animal objects created */
+    void ToString();
+ };
+
+ /* remember we access any attribute or declaration in a parent class with  ClassName::attribute */
+ int Animal::numOfAnimals = 0;
+ void Animal::SetAll(std::string name, double height,
+                     double weight){
+                     this->name = name;
+                     this->weight = weight;
+                     this->height = height;
+                     Animal::numOfAnimals++;
+                     }
+
+Animal::Animal(std::string name, double height, double weight){
+
+         this->name = name;
+         this->weight = weight;
+         this->height = height;
+         Animal::numOfAnimals++;
+}
+
+Animal::Animal(){
+    this->name = "" ;
+    this->weight = 0;
+    this->height = 0;
+    Animal::numOfAnimals++;
+
+}
+
+Animal::~Animal(){
+    std::cout << "Animal " << this -> name << " destroyed \n";
+
+}
+
+void Animal::ToString(){
+
+        std::cout << this -> name << " is " <<
+        this -> height << "cms tall and " << this -> weight <<
+        "kgs in weight \n";
+  }
+
+
+
+/*inheritance is noted as inheriting class name: inherited class */
+class Dog: public Animal {
+private:
+    std::string sound = "Woof";
+public:
+    void MakeSound(){
+       std::cout << "The dog " << this->GetName() <<
+       " says " << this->sound << "\n";
+    }
+   Dog(std::string, double, double, std::string); /* constructor with dogs attribute and animal attribute */
+   Dog(): Animal(){}; /*default constructor which inherits default constructor of animal */
+   void ToString(); /* animals ToString function that outputs same */
+};
+
+Dog::Dog(std::string name, double height, double weight, std::string sound):
+    Animal(name,height,weight){
+        this -> sound = sound;
+
+    }
+void Dog::ToString(){
+
+       /* to access the attributes of the class animal
+          class dog needs to call the get functions because
+          the attributes of class animal are private. */
+
+        std::cout << this -> GetName() << " is " <<
+        this -> GetHeight() << "cms tall and " << this -> GetHeight() <<
+        "kgs in weight  and says " << this -> sound << "\n";
+}
+int main()
+{
+    Animal doggy;
+    doggy.SetHeight(33);
+    doggy.SetWeight(10);
+    doggy.SetName("Max");
+    doggy.ToString();
+
+    Animal catty("mittens", 5 ,3);
+    catty.ToString();
+
+    Dog millie("millie", 5, 8, "who let the dogs out");
+    millie.ToString();
+
+    std::cout << "Number of Animals" <<
+
+        Animal::GetNumOfAnimals() << "\n";
+
+
+      return 0;
+      }
+
+Structs
+
+/*
+ structs used to model new data types
+ same as classes
+
+
+ */
+
+ struct Shape{
+
+     double length, width;
+
+     Shape(double l = 1, double w = 1){
+
+          length = l;
+          width = w;
+     }
+
+     double Area(){
+     return length * width;
+     }
+ private:
+    int id;
+ };
+
+ struct Circle: Shape{
+      Circle(double width){
+          this->width = width;
+      }
+      double Area(){
+       return 3.14 * std::pow((width/2),2);
+       }
+      };
+
+
+int main()
+{
+
+     Shape shape(10,10);
+     std::cout << "Square Area: " <<
+          shape.Area() << "\n";
+     Circle circle(19);
+     std::cout << "Circle Area: " <<
+         circle.Area() << "\n";
+
+     Shape rectangle{10,15};
+     std::cout << "Rectangle Area: " <<
+             rectangle.Area() << "\n";
+
+            
+
+
+
+
+      return 0;
+      }
+
+Friend Classes
+
+
+/*
+ Friend class
+
+ marking a class as a friend, this will result in
+ the friend class to access all attributes and methods
+ even if they are private
+
+
+ */
+
+ class Customer {
+
+private:
+    friend class GetCustomer;
+    std::string customerSlogan;
+
+public:
+    Customer(std::string customerSlogan){
+        this->customerSlogan = customerSlogan;
+
+    }
+};
+
+class GetCustomer{
+public:
+    static std::string GetName(Customer& customer){
+
+    return customer.customerSlogan;
+    }
+};
+
+
+int main()
+{
+
+    Customer criteria("The customer is always right");
+    GetCustomer eski;
+    std::cout << eski.GetName(criteria);
+
+
+
+
+return 0;
+}
+
+Polymorphism
+
+/*
+  PolyMorphism
+  using one resource as needed for other
+
+*/
+
+ class Shape{
+
+ protected:
+     double height;
+     double width;
+ public:
+    Shape(double length){
+          height = length;
+          width = length;
+          }
+    Shape(double h, double w){
+
+    height = h;
+    width = w;
+    }
+    virtual double Area(){
+     return height * width;
+     }
+
+
+     };
+
+class Circle : public Shape{
+public:
+    Circle(double w):
+        Shape(w){
+
+        }
+        double Area(){
+        return 3.14 * std::pow((width/2), 2);
+        }
+        };
+
+        void ShowArea(Shape& shape){
+        std::cout << "Area: " << shape.Area() << "\n";
+        }
+
+
+int main()
+{
+    Shape square(10,5);
+    Circle circle(10);
+    ShowArea(square);
+    ShowArea(circle);
+
+return 0;
+}
+
+'This' is used to access private objects
+
+class student{
+
+private:
+
+    int id;
+
+public:
+
+    void setID(int id){
+
+        this->id = id;
+        std::cout << id<< "\n";
+           }
+           void print(){
+
+           std::cout << id;
+           }
+
+
+           };
+
+
+int main()
+{
+
+    student sami;
+    sami.setID(10);
+    sami.print();
+
+
+
+
+return 0;
+} 
+
+
+Accessing private field data types
+
+
+class Book{
+
+    private:
+       double grade;
+    public:
+           std::string name;
+           std::string course;
+           
+           
+    
+    Book(std::string Username, std::string Usercourse, double Usergrade){
+        
+          name = Username;
+          course = Usercourse;
+          setGrade(Usergrade);
+
+        std::cout << "-------------- " << "\n";
+        std::cout << "name: " << name << "\n";
+        std::cout << "course: " << course << "\n";
+        std::cout << "grade: " << grade << "\n";
+    }
+
+     setGrade(double Usergrade){
+        grade = Usergrade;
+        
+    }
+
+};
+
+std::string IsEligible(double grade);
+
+
+
+
+int main(){
+
+    Book fantasy("samuel arefeaynie", "Java",5);
+
+    fantasy.setGrade(3.4);
+
+    std::string verdict = IsEligible(fantasy.setGrade(3.4));
+    std::cout << fantasy.name << " is " << verdict;
+ 
+}
+
+//Function Definition
+
+std::string IsEligible(double grade){
+
+    if(grade > 3.5){
+
+        return "Eligible";
+    }
+
+    else{
+        return "Not Eligible";
+    }
+}

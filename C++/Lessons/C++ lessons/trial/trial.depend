@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1634819340 source:g:\users\sami\desktop\lessons\c++ lessons\trial\main.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+	<vector>
+	<sstream>
+	<limits>
+	<cstring>
+	<algorithm>
+	<numeric>
+	<time.h>
+	<cmath>
+	<string.h>
+	<functional>
+
